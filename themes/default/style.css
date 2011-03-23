@@ -1,0 +1,68 @@
+body {
+	background-color:black;
+	color:white;
+	font-family:courier;
+}
+
+p {
+	font-family:courier;
+}
+
+h2 {
+	font-family:courier;
+	color: white;
+	font-variant: small-caps;
+	font-size:190%;
+}
+
+h1 {
+	font-family:courier;
+	color: white;
+	font-variant: small-caps;
+	font-size:550%
+}
+
+h3 {
+	font-family:courier;
+}
+
+a:link { 
+	color: silver; 
+	text-decoration: none;
+}
+
+a:visited { 
+	color: silver; 
+	text-decoration: none;
+}
+
+a:active { 
+	color:gray; 
+	text-decoration: none;
+}
+
+a:hover { 
+	color:gray; 
+	text-decoration: underline;
+}
+
+img { 
+	border: none; 
+}
+
+#header {
+	width: 94%;
+	margin-top: 100px;
+	margin: 0 auto;
+	font-variant: small-caps;
+	text-align:center;
+	/* position:fixed; */
+
+}
+
+
+#page {
+	/* padding-top: 100px; */
+	width: 94%;
+	margin: 0 auto;
+}
