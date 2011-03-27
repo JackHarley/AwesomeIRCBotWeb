@@ -1,38 +1,43 @@
 body {
 	background-color:black;
 	color:white;
-	font-family:courier;
+	font-family:tahoma;
 }
 
 p {
-	font-family:courier;
+	font-family:tahoma;
 }
 
 h2 {
-	font-family:courier;
+	font-family:tahoma;
 	color: white;
 	font-variant: small-caps;
 	font-size:190%;
 }
 
 h1 {
-	font-family:courier;
+	font-family:tahoma;
 	color: white;
 	font-variant: small-caps;
-	font-size:550%
+	font-size:450%;
 }
 
 h3 {
-	font-family:courier;
+	font-family:tahoma;
 }
 
 a:link { 
-	color: silver; 
+	color: white; 
+	text-decoration: none;
+}
+
+a.navbarlink {
+	color: white;
 	text-decoration: none;
 }
 
 a:visited { 
-	color: silver; 
+	color: white; 
 	text-decoration: none;
 }
 
@@ -65,4 +70,16 @@ img {
 	/* padding-top: 100px; */
 	width: 94%;
 	margin: 0 auto;
+}
+
+#left {
+	width:80%;
+	margin: 0 auto;
+	float: left;    
+}
+
+#right {
+	width:20%;
+	margin: 0 auto;
+	float: right;
 }

@@ -8,8 +8,8 @@
 	
 	<body>
 		<div id="header">
-			<h1>Awesome IRC Bot</h1>
-			<h2><a href="{% url /index.php %}">Home</a> | <a href="{% url /index.php/logs %}">Logs</a> | <a href="{% url /index.php/stats %}">Stats</a> | <a href="{% url /index.php/stats/leaderboards %}">Leaderboards</a> | <a href="{% url /index.php/help %}">Help</a> | <a href="{% url /index.php/chat %}">Chat!</a>
+			<h1>{{ircAddress}} {{channel}}</h1>
+			<h2><a class="navbarlink" href="{% url /index.php %}">Home</a> | <a href="{% url /index.php/logs %}">Logs</a> | <a href="{% url /index.php/channel %}">Channel Right Now</a> | <a href="{% url /index.php/stats %}">Stats</a> | <a href="{% url /index.php/stats/leaderboards %}">Leaderboards</a> | <a href="{% url /index.php/help %}">Help</a> | <a href="{% url /index.php/chat %}">Chat!</a>
 		</div>
 		
 		<div id="page">
