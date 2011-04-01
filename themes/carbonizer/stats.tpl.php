@@ -1,5 +1,7 @@
 {% extends base %}
 
+{% block pageTitle %}Statistics{% endblock %}
+
 {% block content %}
 <h1>{{channel}} Statistics</h1>
 

@@ -1,5 +1,7 @@
 {% extends base %}
 
+{% block pageTitle %}Stats for {{nickname}}{% endblock %}
+
 {% block content %}
 <h1>Stats for {{nickname}}</h1>
 

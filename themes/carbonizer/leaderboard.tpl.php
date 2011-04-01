@@ -1,5 +1,7 @@
 {% extends base %}
 
+{% block pageTitle %}Leaderboards{% endblock %}
+
 {% block content %}
 <h1>Channel Leaderboards</h1>
 
