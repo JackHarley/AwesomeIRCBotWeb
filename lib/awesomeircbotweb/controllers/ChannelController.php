@@ -24,8 +24,33 @@ class ChannelController extends Controller {
 		$latestMessages = $ChannelModel->getLatestMessages(50);
 		
 		View::load('channel', array(
-			"latestMessages" => $latestMessages)
+			"latestMessages" => $latestMessages,
+			"latestMessage" => $latestMessages[0])
 		);
+	}
+	
+	public function ajax() {
+		
+		$ChannelModel = ChannelModel::getInstance();
+		$time = time();
+		while((time() - $time) < 30) {
+			$latestMessage = $ChannelModel->getMessagePastTimestamp($_POST["timestamp"]);
+			
+			if(!empty($latestMessage)) {
+				$nickname = $latestMessage->nickname;
+				$message = $latestMessage->message;
+				$timestamp = $latestMessage->time;
+				
+				$data = array("message" => $message,
+							  "timestamp" => $timestamp,
+							  "nickname" => $nickname);
+				
+				echo json_encode($data);
+				break;
+			}
+			
+			usleep(25000);
+		}
 	}
 }
 

@@ -218,5 +218,15 @@ class ChannelModel extends Model {
 			$i++;
 		return $i;
 	}
-			
+	
+	public function getMessagePastTimestamp($timestamp) {
+		$query = new Query("SELECT");
+		$query->where("channel_name = ?", Config::getVal("general", "channel"));
+		$query->where("time > ?", $timestamp);
+		$query->orderby("time", "ASC");
+		$query->limit(1);
+		
+		$messages = ChannelMessageBean::select($query);
+		return $messages[0];
+	}
 }

@@ -6,6 +6,28 @@
 			{{channel}} -> {% block pageTitle %}{% endblock %}
 		</title>
 		<link href="{% viewurl /style.css %}" rel="stylesheet" type="text/css"/>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.1.min.js"></script>
+		<script type="text/javascript">
+			var lpOnComplete = function(response) {
+				var jsonObj = response;
+				var html = '<tr><td><b><a href="{% url /index.php/stats/user %}/'+jsonObj.nickname+'">&lt;'+jsonObj.nickname+'&gt;</a></b></td><td>'+jsonObj.message+'</td></tr>';
+			
+				$(html).prependTo('#messagelist');
+				$('#latestmessagets').val(jsonObj.timestamp);
+				lpStart();
+			};
+			 
+			var lpStart = function() {
+				var timestamp = $('#latestmessagets').val();
+				$.post('{% url /index.php/channel/ajax %}', {timestamp: timestamp}, lpOnComplete, 'json');
+			};
+			 
+			var lpReady = function() {
+				setTimeout("lpStart()", 1000);
+			}
+			
+			$(window).load(lpReady);
+		</script>
 	</head>
 	
 	<body>
@@ -30,22 +52,22 @@
 						<ul>
 							{% for user in onlineUsers %}
 								{% if user.privilege == "~" %}
-									<li style="color:green">{{user.privilege}}{{user.nickname}}</li>
+									<li><a style="color:green" href="{% url /index.php/stats/user %}/{{user.nickname}}">{{user.privilege}}{{user.nickname}}</a></li>
 								{% endif %}
 								{% if user.privilege == "&" %}
-									<li style="color:red">{{user.privilege}}{{user.nickname}}</li>
+									<li><a style="color:red" href="{% url /index.php/stats/user %}/{{user.nickname}}">{{user.privilege}}{{user.nickname}}</a></li>
 								{% endif %}
 								{% if user.privilege == "@" %}
-									<li style="color:brown">{{user.privilege}}{{user.nickname}}</li>
+									<li><a style="color:brown" href="{% url /index.php/stats/user %}/{{user.nickname}}">{{user.privilege}}{{user.nickname}}</a></li>
 								{% endif %}
 								{% if user.privilege == "%" %}
-									<li style="color:blue">{{user.privilege}}{{user.nickname}}</li>
+									<li><a style="color:blue" href="{% url /index.php/stats/user %}/{{user.nickname}}">{{user.privilege}}{{user.nickname}}</a></li>
 								{% endif %}
 								{% if user.privilege == "+" %}
-									<li style="color:purple">{{user.privilege}}{{user.nickname}}</li>
+									<li><a style="color:purple" href="{% url /index.php/stats/user %}/{{user.nickname}}">{{user.privilege}}{{user.nickname}}</a></li>
 								{% endif %}
 								{% if user.privilege == "" %}
-									<li style="color:black">{{user.privilege}}{{user.nickname}}</li>
+									<li><a style="color:black" href="{% url /index.php/stats/user %}/{{user.nickname}}">{{user.privilege}}{{user.nickname}}</a></li>
 								{% endif %}
 							{% endfor %}
 						</ul>
