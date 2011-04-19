@@ -19,10 +19,12 @@ class LeaderboardController extends Controller {
 		$UserModel = UserModel::getInstance();
 		$leaderboardPastWeekArray = $UserModel->getTopUsersByMessageCount(50, "week");
 		$leaderboardPastDayArray = $UserModel->getTopUsersByMessageCount(50, "day");
+		$leaderboardPastHourArray = $UserModel->getTopUsersByMessageCount(50, "hour");
 		
 		View::load("leaderboard", array(
 			"leaderboardWeekEntries" => $leaderboardPastWeekArray,
-			"leaderboardDayEntries" => $leaderboardPastDayArray)
+			"leaderboardDayEntries" => $leaderboardPastDayArray,
+			"leaderboardHourEntries" => $leaderboardPastHourArray,)
 		);
 	}
 

@@ -6,7 +6,7 @@ use hydrogen\database\Query;
 use hydrogen\config\Config;
 
 use awesomeircbotweb\sqlbeans\ChannelUserBean;
-use awesomeircbotweb\sqlbeans\ChannelMessageBean;
+use awesomeircbotweb\sqlbeans\ChannelActionBean;
 
 class UserModel extends Model {
 	
@@ -25,7 +25,7 @@ class UserModel extends Model {
 				$query->where("time > ?", time()-60*60);
 		}
 		
-		$messages = ChannelMessageBean::select($query);
+		$messages = ChannelActionBean::select($query);
 		
 		$leaderboards = array();
 		foreach($messages as $message) {
@@ -80,7 +80,7 @@ class UserModel extends Model {
 	public function getMessageCount($nick, $time=false) {
 		if (!$time) {
 			$query = new Query("SELECT");
-			$query->from("channel_messages");
+			$query->from("channel_actions");
 			$query->field("id");
 			$query->where("channel_name = ?", Config::getVal("general", "channel"));
 			$query->where("nickname = ?", $nick);
@@ -95,7 +95,7 @@ class UserModel extends Model {
 		}
 		else if ($time == "hour") {
 			$query = new Query("SELECT");
-			$query->from("channel_messages");
+			$query->from("channel_actions");
 			$query->field("id");
 			$query->where("channel_name = ?", Config::getVal("general", "channel"));
 			$query->where("time > ?", time()-60*60);
@@ -111,7 +111,7 @@ class UserModel extends Model {
 		}
 		else if ($time == "day") {
 			$query = new Query("SELECT");
-			$query->from("channel_messages");
+			$query->from("channel_actions");
 			$query->field("id");
 			$query->where("channel_name = ?", Config::getVal("general", "channel"));
 			$query->where("time > ?", time()-60*60*24);
@@ -127,7 +127,7 @@ class UserModel extends Model {
 		}
 		else if ($time == "week") {
 			$query = new Query("SELECT");
-			$query->from("channel_messages");
+			$query->from("channel_actions");
 			$query->field("id");
 			$query->where("channel_name = ?", Config::getVal("general", "channel"));
 			$query->where("time > ?", time()-60*60*24*7);

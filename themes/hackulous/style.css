@@ -1,0 +1,106 @@
+body {
+	background: #61B1D8;
+	background: -moz-linear-gradient(top, #61B1D8 0%, #FCFCFC 37%); /* firefox */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#61B1D8), color-stop(37%,#FCFCFC)); /* webkit */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#61B1D8', endColorstr='#FCFCFC',GradientType=0 ); /* ie */
+	background-repeat:no-repeat;
+	color:black;
+	font-family:MuseoSans;
+}
+
+@font-face {
+	font-family: 'MuseoSans';
+	src:	url('fonts/eot/style_159303.eot') format('eot'),
+			url('fonts/woff/style_159303.woff') format('woff'),
+			url('fonts/svg/style_159303.svg') format('svg');
+}
+
+p {
+	font-size:120%;
+}
+
+h2 {
+	font-size:160%;
+}
+
+h1 {
+	font-size:250%;
+}
+
+h3 {
+}
+
+a:link { 
+	text-decoration: none;
+	color:black;
+}
+
+a.navbarlink {
+	text-decoration: none;
+	color:black;
+}
+
+a:visited {
+	color:black;
+	text-decoration: none;
+}
+
+a:active { 
+	color:gray; 
+	text-decoration: none;
+}
+
+a:hover { 
+	color:gray; 
+	text-decoration: underline;
+}
+
+img { 
+	border: none; 
+}
+
+#header {
+	width: 94%;
+	margin-top: 100px;
+	margin: 0 auto;
+	text-align:center;
+	/* position:fixed; */
+
+}
+
+
+#page {
+	/* padding-top: 100px; */
+	width: 94%;
+	margin: 0 auto;
+}
+
+#left {
+	width:80%;
+	margin: 0 auto;
+	float: left;    
+}
+
+#right {
+	width:20%;
+	margin: 0 auto;
+	float: right;
+}
+
+#leaderboard {overflow: hidden; display: inline-block;} #leaderboard {display: block;} /* These two declarations are needed to 'contain' the floats - you don't need your <br class="clearfloat" /> now! */
+
+#left-leaderboard {
+	float: left;
+	width: 33%;
+}
+
+#right-leaderboard {
+	float: right;
+	width: 33%;
+}
+#center-leaderboard {
+	text-align: left;
+	margin: 0 33%;
+	overflow:hidden;
+	width:33%;
+}

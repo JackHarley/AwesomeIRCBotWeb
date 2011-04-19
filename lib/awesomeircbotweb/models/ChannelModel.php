@@ -6,7 +6,7 @@ use hydrogen\database\Query;
 use hydrogen\config\Config;
 
 use awesomeircbotweb\sqlbeans\ChannelUserBean;
-use awesomeircbotweb\sqlbeans\ChannelMessageBean;
+use awesomeircbotweb\sqlbeans\ChannelActionBean;
 
 class ChannelModel extends Model {
 	
@@ -52,22 +52,26 @@ class ChannelModel extends Model {
 		return $orderedUsers;
 	}
 	
-	public function getLatestMessages($count) {
+	public function getLatestMessages($count, $nick=false) {
 		$query = new Query("SELECT");
 		$query->where("channel_name = ?", Config::getVal("general", "channel"));
 		$query->orderby("time", "DESC");
 		$query->limit($count);
 		
-		$messages = ChannelMessageBean::select($query);
+		if ($nick)
+			$query->where("nickname = ?", $nick);
+		
+		$messages = ChannelActionBean::select($query);
 		return $messages;
 	}
 	
 	public function getMessageCount($time=false) {
 		if (!$time) {
 			$query = new Query("SELECT");
-			$query->from("channel_messages");
+			$query->from("channel_actions");
 			$query->field("id");
 			$query->where("channel_name = ?", Config::getVal("general", "channel"));
+			$query->where("type = ?", ReceivedLineTypes::CHANMSG);
 			
 			$stmt = $query->prepare();
 			$stmt->execute();
@@ -79,10 +83,11 @@ class ChannelModel extends Model {
 		}
 		else if ($time == "hour") {
 			$query = new Query("SELECT");
-			$query->from("channel_messages");
+			$query->from("channel_actions");
 			$query->field("id");
 			$query->where("channel_name = ?", Config::getVal("general", "channel"));
 			$query->where("time > ?", time()-60*60);
+			$query->where("type = ?", ReceivedLineTypes::CHANMSG);
 			
 			$stmt = $query->prepare();
 			$stmt->execute();
@@ -94,10 +99,11 @@ class ChannelModel extends Model {
 		}
 		else if ($time == "day") {
 			$query = new Query("SELECT");
-			$query->from("channel_messages");
+			$query->from("channel_actions");
 			$query->field("id");
 			$query->where("channel_name = ?", Config::getVal("general", "channel"));
 			$query->where("time > ?", time()-60*60*24);
+			$query->where("type = ?", ReceivedLineTypes::CHANMSG);
 			
 			$stmt = $query->prepare();
 			$stmt->execute();
@@ -109,10 +115,11 @@ class ChannelModel extends Model {
 		}
 		else if ($time == "week") {
 			$query = new Query("SELECT");
-			$query->from("channel_messages");
+			$query->from("channel_actions");
 			$query->field("id");
 			$query->where("channel_name = ?", Config::getVal("general", "channel"));
 			$query->where("time > ?", time()-60*60*24*7);
+			$query->where("type = ?", ReceivedLineTypes::CHANMSG);
 			
 			$stmt = $query->prepare();
 			$stmt->execute();
@@ -226,7 +233,7 @@ class ChannelModel extends Model {
 		$query->orderby("time", "ASC");
 		$query->limit(1);
 		
-		$messages = ChannelMessageBean::select($query);
+		$messages = ChannelActionBean::select($query);
 		return $messages[0];
 	}
 }
