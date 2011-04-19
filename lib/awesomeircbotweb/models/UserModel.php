@@ -1,4 +1,11 @@
 <?php
+/**
+ * User Model
+ * Gets information about users
+ *
+ * Copyright (c) 2011, Jack Harley
+ * All Rights Reserved
+ */
 namespace awesomeircbotweb\models;
 use hydrogen\model\Model;
 

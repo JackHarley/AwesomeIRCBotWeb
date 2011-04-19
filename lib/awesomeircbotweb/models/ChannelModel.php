@@ -1,5 +1,14 @@
 <?php
+/**
+ * Channel Model
+ * Contains functions to use for getting
+ * information about a channel
+ *
+ * Copyright (c) 2011, Jack Harley
+ * All Rights Reserved
+ */
 namespace awesomeircbotweb\models;
+
 use hydrogen\model\Model;
 
 use hydrogen\database\Query;

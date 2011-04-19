@@ -1,4 +1,10 @@
 <?php
+/**
+ * Channel Action SQLBean
+ *
+ * Copyright (c) 2011, Jack Harley
+ * All Rights Reserved
+ */
 namespace awesomeircbotweb\sqlbeans;
 use hydrogen\sqlbeans\SQLBean;
 
