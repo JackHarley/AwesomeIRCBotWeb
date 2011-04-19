@@ -8,6 +8,8 @@ use hydrogen\config\Config;
 use awesomeircbotweb\sqlbeans\ChannelUserBean;
 use awesomeircbotweb\sqlbeans\ChannelActionBean;
 
+use awesomeircbotweb\classes\ReceivedLineTypes;
+
 class UserModel extends Model {
 	
 	protected static $modelID = "user";
@@ -15,6 +17,7 @@ class UserModel extends Model {
 	public function getTopUsersByMessageCount($count=false, $time=false) {
 		$query = new Query("SELECT");
 		$query->where("channel_name = ?", Config::getVal("general", "channel"));
+		$query->where("type = ?", ReceivedLineTypes::CHANMSG);
 		
 		if ($time) {
 			if ($time == "week")

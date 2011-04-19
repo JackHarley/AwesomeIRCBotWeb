@@ -8,6 +8,8 @@ use hydrogen\config\Config;
 use awesomeircbotweb\sqlbeans\ChannelUserBean;
 use awesomeircbotweb\sqlbeans\ChannelActionBean;
 
+use awesomeircbotweb\classes\ReceivedLineTypes;
+
 class ChannelModel extends Model {
 	
 	protected static $modelID = "channel";
@@ -85,6 +87,7 @@ class ChannelModel extends Model {
 			$query = new Query("SELECT");
 			$query->from("channel_actions");
 			$query->field("id");
+			
 			$query->where("channel_name = ?", Config::getVal("general", "channel"));
 			$query->where("time > ?", time()-60*60);
 			$query->where("type = ?", ReceivedLineTypes::CHANMSG);

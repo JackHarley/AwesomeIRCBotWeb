@@ -43,21 +43,29 @@ class ChannelController extends Controller {
 			echo "Invalid Request";
 			return;
 		}
-		
+			
 		$ChannelModel = ChannelModel::getInstance();
 		$time = time();
 		while((time() - $time) < 120) {
 			$latestMessage = $ChannelModel->getMessagePastTimestamp($_POST["timestamp"]);
 			
 			if(!empty($latestMessage)) {
-				$nickname = $latestMessage->nickname;
-				$message = $latestMessage->message;
-				$timestamp = $latestMessage->time;
 				
-				$data = array("message" => $message,
-							  "timestamp" => $timestamp,
-							  "nickname" => $nickname);
+				$split = explode(" ", $latestMessage->message);
+				if (strpos($split[0], "ACTION") !== false) {
+					$latestMessage->message = $latestMessage->nickname . str_replace("ACTION", "", $latestMessage->message);
+					$latestMessage->nickname = " ";
+				}
 				
+				$data = array(
+					"message" => $latestMessage->message,
+					"timestamp" => $latestMessage->time,
+					"nickname" => $latestMessage->nickname,
+					"target_nick" => $latestMessage->target_nick,
+					"channel_name" => $latestMessage->channel_name,
+					"type" => $latestMessage->type
+				);
+					
 				echo json_encode($data);
 				break;
 			}

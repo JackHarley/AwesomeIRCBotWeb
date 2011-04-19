@@ -18,9 +18,12 @@ require_once(__DIR__ . "/lib/awesomeircbotweb/awesomeircbotweb.inc.php");
 use hydrogen\controller\Dispatcher;
 use hydrogen\view\View;
 use hydrogen\config\Config;
+use hydrogen\errorhandler\ErrorHandler;
 
 use awesomeircbotweb\models\ChannelModel;
 
+ErrorHandler::attachErrorPage();
+ 
 View::setVar("channel", Config::getVal("general", "channel"));
 View::setVar("ircAddress", Config::getVal("general", "irc_network_address"));
 
