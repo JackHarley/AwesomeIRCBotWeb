@@ -1,2 +1,3 @@
 *.komodo*/*
 *.komodoproject
+.DS_Store
