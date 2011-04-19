@@ -14,7 +14,6 @@ date_default_timezone_set('UTC');
 
 require_once(__DIR__ . "/lib/hydrogen/hydrogen.inc.php");
 require_once(__DIR__ . "/lib/awesomeircbotweb/awesomeircbotweb.inc.php");
-require_once(__DIR__ . "/lib/piegraph/piegraph.class.php");
 
 use hydrogen\controller\Dispatcher;
 use hydrogen\view\View;
