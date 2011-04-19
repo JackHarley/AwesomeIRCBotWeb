@@ -1,50 +1,43 @@
 <?php $ini = <<<'EOF'
 ;*************************************************************************
-; Hydrogen Configuration
+; Awesome IRC Bot Configuration
 ; RENAME TO config.ini.php AND EDIT ONLY WHERE MARKED!
 ;*************************************************************************
 
 [general]
 ; EDIT ALL 3 OF THE FOLLOWING LINES
 app_url = "http://awesomeircbot.co.cc/"
-channel = "#webdevrefinery"
-irc_network_address = "irc.webdevrefinery.com"
-
-[cache]
-engine = "Memcache"
+channel = "#TechndStuff"
+irc_network_address = "irc.rizon.net"
 
 [database]
-engine = "SqlitePDO"
-host = 
-port =
 ; EDIT THE FOLLOWING LINE TO BE THE PATH TO THE DATABASE AWESOMEIRCBOT HAS CREATED
 ; IT WILL BE IN THE /database DIR OF YOUR AWESOMEIRCBOT INSTALLATION
 database = "/home/jack/awesomeircbot/database/database.sqlite"
-username = 
-password = 
-table_prefix = 
+engine = "SqlitePDO"
 
+[view]
+; THE DEFAULT THEME IS 'SILVER', IF YOU HAVE CREATED A
+; CUSTOM THEME, CHANGE THE BELOW SETTING TO REFLECT YOUR THEME'S NAME
+folder = "themes/silver"
+url_path = "themes/silver"
+
+; **************************
+; DO NOT EDIT BELOW THIS LINE!
+; **************************
+[cache]
+engine = "Memcache"
 [recache]
 unique_name = 'AIB'
-
 [semaphore]
 engine = "Cache"
-
 [errorhandler]
 log_errors = 1
-
 [log]
 engine = TextFile
 logdir = log
 fileprefix = "aib_"
-; 0 = No logging
-; 1 = Log Errors
-; 2 = Log Warnings & worse
-; 3 = Log Notices & worse
-; 4 = Log Info & worse
-; 5 = Log Debug messages & worse
 loglevel = 2
-
-;*************************************************************************
+; **************************
 EOF;
 ?>
