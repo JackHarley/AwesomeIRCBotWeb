@@ -60,7 +60,13 @@
 						<td>{{message.message}}</td>
 					{% else if message.type == 421 %}
 						<td></td>
-						<td>-> {{message.nickname}} joined the channel</td>
+						<td>{{message.nickname}} joined the channel</td>
+					{% else if message.type == 422 %}
+						<td></td>
+						<td>{{message.nickname}} left the channel</td>
+					{% else if message.type == 412 %}
+						<td></td>
+						<td>{{message.nickname}} changed nickname to {{message.target_nick}}</td>
 					{% else %}
 						<td></td>
 						<td>{{message.type}}</td>
