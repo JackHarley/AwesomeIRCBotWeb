@@ -57,7 +57,7 @@
 						{% else %}
 							<td></td>
 						{% endif %}
-						<td>{{message.message}}</td>
+						<td>{{message.message|urlize}}</td>
 					{% else if message.type == 421 %}
 						<td></td>
 						<td>{{message.nickname}} joined the channel</td>
