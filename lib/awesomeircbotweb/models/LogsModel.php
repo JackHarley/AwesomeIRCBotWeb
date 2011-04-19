@@ -1,4 +1,12 @@
 <?php
+/**
+ * Logs Model
+ * Contains functions to get logs of actions
+ * which occured
+ *
+ * Copyright (c) 2011, Jack Harley
+ * All Rights Reserved
+ */
 namespace awesomeircbotweb\models;
 use hydrogen\model\Model;
 
