@@ -5,28 +5,12 @@
 		
 		<title>Awesome IRC Bot -> {% block pageTitle %}{% endblock %}</title>
 		
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.1.min.js"></script>
-		<script type="text/javascript">
-			var lpOnComplete = function(response) {
-				var jsonObj = response;
-				var html = '<tr><td><b><a href="{% url /index.php/stats/user %}/'+jsonObj.nickname+'">&lt;'+jsonObj.nickname+'&gt;</a></b></td><td>'+jsonObj.message+'</td></tr>';
-			
-				$(html).prependTo('#messagelist');
-				$('#latestmessagets').val(jsonObj.timestamp);
-				lpStart();
-			};
-			 
-			var lpStart = function() {
-				var timestamp = $('#latestmessagets').val();
-				$.post('{% url /index.php/channel/ajax %}', {timestamp: timestamp}, lpOnComplete, 'json');
-			};
-			 
-			var lpReady = function() {
-				setTimeout("lpStart()", 1000);
-			}
-			
-			$(window).load(lpReady);
-		</script>
+		{% block jsOne %}
+			<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.1.min.js"></script>
+		{% endblock %}
+		
+		{% block jsTwo %}
+		{% endblock %}
 	</head>
 	
 	<body>
