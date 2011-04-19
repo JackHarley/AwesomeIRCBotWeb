@@ -50,6 +50,7 @@ class StatsController extends Controller {
 	public function user($nick) {
 		
 		$UserModel = UserModel::getInstance();
+		$ChannelModel = ChannelModel::getInstance();
 		
 		if ($UserModel->getOnlineStatus($nick))
 			$isOnline = "yes";
@@ -57,13 +58,15 @@ class StatsController extends Controller {
 		$hourMessages = $UserModel->getMessageCount($nick, "hour");
 		$dayMessages = $UserModel->getMessageCount($nick, "day");
 		$weekMessages = $UserModel->getMessageCount($nick, "week");
+		$latestUserMessages = $ChannelModel->getLatestMessages(10, $nick);
 		
 		View::load("userstats", array(
 			"online" => $isOnline,
 			"nickname" => $nick,
 			"hourMessages" => $hourMessages,
 			"dayMessages" => $dayMessages,
-			"weekMessages" => $weekMessages)
+			"weekMessages" => $weekMessages,
+			"latestUserMessages" => $latestUserMessages)
 		);
 	}
 }

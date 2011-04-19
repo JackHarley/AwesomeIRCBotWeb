@@ -22,6 +22,14 @@ class ChannelController extends Controller {
 		
 		$ChannelModel = ChannelModel::getInstance();
 		$latestMessages = $ChannelModel->getLatestMessages(50);
+		foreach ($latestMessages as $id => $message) {
+			$split = explode(" ", $message->message);
+			
+			if (strpos($split[0], "ACTION") !== false) {
+				$latestMessages[$id]->message = $message->nickname . str_replace("ACTION", "", $latestMessages[$id]->message);
+				$latestMessages[$id]->nickname = " ";
+			}
+		}
 		
 		View::load('channel', array(
 			"latestMessages" => $latestMessages,
@@ -31,9 +39,14 @@ class ChannelController extends Controller {
 	
 	public function ajax() {
 		
+		if (!$_POST["timestamp"]) {
+			echo "Invalid Request";
+			return;
+		}
+		
 		$ChannelModel = ChannelModel::getInstance();
 		$time = time();
-		while((time() - $time) < 30) {
+		while((time() - $time) < 120) {
 			$latestMessage = $ChannelModel->getMessagePastTimestamp($_POST["timestamp"]);
 			
 			if(!empty($latestMessage)) {

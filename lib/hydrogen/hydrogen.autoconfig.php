@@ -97,7 +97,7 @@ Config::addConfig(
  ***  The folder, relative to the base path, where views for the View library
  ***  are stored.
  ***/
-Config::setVal("view", "folder", "themes/carbonizer");
+Config::setVal("view", "folder", "themes/hackulous");
 
 
 /***  FOR THE FILE LOADER ONLY:
@@ -116,7 +116,7 @@ Config::setVal("view", "file_extension", ".tpl.php");
  ***  view files (images, css, etc) with the web browser.  If you're using the
  ***  'File' loader, this will almost always match your view folder path.
  ***/
-Config::setVal("view", "url_path", "themes/carbonizer");
+Config::setVal("view", "url_path", "themes/hackulous");
 
 
 /***  [view] -> root_url
@@ -182,6 +182,7 @@ Config::setVal("view", "print_missing_var", true);
 /*HydrogenEngine::addFilter('swedishchef', '\myapp\filters\BorkFilter',
 	'lib/myapp/filters/BorkFilter.php'); */
 //HydrogenEngine::addFilterNamespace('\myapp\filters');
+HydrogenEngine::addFilterNamespace('\awesomeircbotweb\filters');
 
 
 /***  FOR THE 'hydrogen' VIEW ENGINE ONLY:

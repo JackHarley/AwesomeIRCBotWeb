@@ -10,6 +10,7 @@
 
 error_reporting(E_ALL & ~E_NOTICE);
 ini_set("display_errors", "On");
+date_default_timezone_set('UTC');
 
 require_once(__DIR__ . "/lib/hydrogen/hydrogen.inc.php");
 require_once(__DIR__ . "/lib/awesomeircbotweb/awesomeircbotweb.inc.php");
