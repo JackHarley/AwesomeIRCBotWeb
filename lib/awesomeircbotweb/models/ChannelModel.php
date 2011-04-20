@@ -248,4 +248,26 @@ class ChannelModel extends Model {
 		$messages = ChannelActionBean::select($query);
 		return $messages[0];
 	}
+	
+	public function getMessageBeforeTimestamp($timestamp) {
+		$query = new Query("SELECT");
+		$query->where("channel_name = ?", Config::getVal("general", "channel"));
+		$query->where("time < ?", $timestamp);
+		$query->orderby("time", "DESC");
+		$query->limit(1);
+		
+		$messages = ChannelActionBean::select($query);
+		return $messages[0];
+	}
+	
+	public function getMessagesBeforeTimestamp($timestamp, $count) {
+		$query = new Query("SELECT");
+		$query->where("channel_name = ?", Config::getVal("general", "channel"));
+		$query->where("time < ?", $timestamp);
+		$query->orderby("time", "DESC");
+		$query->limit($count);
+		
+		$messages = ChannelActionBean::select($query);
+		return $messages;
+	}
 }

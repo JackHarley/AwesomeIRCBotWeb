@@ -38,7 +38,49 @@
 		setTimeout("lpStart()", 1000);
 	}
 	
+	var processOlderMessages = function(response) {
+		var data = response;
+		
+		for(var n in data) {
+			
+			if (data[n].type == 4412) {
+				if (data[n].nickname != " ") {
+					var html = '<tr><td><b><a href="{% url /index.php/stats/user %}/'+data[n].nickname+'">&lt;'+data[n].nickname+'&gt;</a></b></td><td>'+data[n].message+'</td></tr>';
+				}
+				else {
+					var html = '<tr><td></td><td>'+data[n].message+'</td></tr>';
+				}
+			}
+			else if (data[n].type == 421) {
+				var html = '<tr><td></td><td>'+data[n].nickname+' joined the channel</td></tr>';
+			}
+			else if (data[n].type == 422) {
+				var html = '<tr><td></td><td>'+data[n].nickname+' left the channel</td></tr>';
+			}
+			else if (data[n].type == 412) {
+				var html = '<tr><td></td><td>'+data[n].nickname+' changed nickname to '+data[n].target_nick+'</td></tr>';
+			}
+		
+			$(html).appendTo('#messagelist');
+			$('#oldestmessagets').val(data[n].timestamp);
+		}
+	}
+		
+	var getOlderMessages = function() {
+		var timestamp = $('#oldestmessagets').val();
+		$.post('{% url /index.php/channel/ajaxolder %}', {timestamp: timestamp}, processOlderMessages, 'json');
+	}
+	
 	$(window).load(lpReady);
+	
+	$(window).scroll(
+		function() {
+			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+				setTimeout("getOlderMessages()", 500);
+			}
+		}
+	);
+	
 </script>
 {% endblock %}
 
@@ -49,6 +91,7 @@
 	<p>
 		<table id="messagelist" cellpadding="0" border="0">
 			<input type="hidden" id="latestmessagets" value="{{latestMessage.time}}" />
+			<input type="hidden" id="oldestmessagets" value="{{oldestMessage.time}}" />
 			{% for message in latestMessages %}
 				<tr>
 					{% if message.type == 4412 %}
@@ -74,7 +117,8 @@
 			{% endfor %}
 		</table>
 	</p>
-</div>		
+	<img src="{% viewurl /images/ajax-loader.gif %}" style="text-align:center;" />
+</div>
 <div id="right">
 	<p>
 		{% for user in onlineUsers %}
