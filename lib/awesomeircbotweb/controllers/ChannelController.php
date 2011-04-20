@@ -21,7 +21,7 @@ class ChannelController extends Controller {
 	public function index() {
 		
 		$ChannelModel = ChannelModel::getInstance();
-		$latestMessages = $ChannelModel->getLatestMessages(50);
+		$latestMessages = $ChannelModel->getLatestMessages(75);
 		foreach ($latestMessages as $id => $message) {
 			$split = explode(" ", $message->message);
 			
@@ -33,7 +33,8 @@ class ChannelController extends Controller {
 		
 		View::load('channel', array(
 			"latestMessages" => $latestMessages,
-			"latestMessage" => $latestMessages[0])
+			"latestMessage" => $latestMessages[0],
+			"oldestMessage" => $latestMessages[49])
 		);
 	}
 	
@@ -72,6 +73,38 @@ class ChannelController extends Controller {
 			
 			usleep(25000);
 		}
+	}
+	
+	public function ajaxolder() {
+		
+		if (!$_POST["timestamp"]) {
+			echo "Invalid Request";
+			return;
+		}
+			
+		$ChannelModel = ChannelModel::getInstance();
+		$olderMessages = $ChannelModel->getMessagesBeforeTimestamp($_POST["timestamp"], 50);
+		$returnData = array();
+		
+		foreach($olderMessages as $olderMessage) {
+			$split = explode(" ", $olderMessage->message);
+			if (strpos($split[0], "ACTION") !== false) {
+				$olderMessage->message = $olderMessage->nickname . str_replace("ACTION", "", $olderMessage->message);
+				$olderMessage->nickname = " ";
+			}
+		
+			$data = array(
+				"message" => $olderMessage->message,
+				"timestamp" => $olderMessage->time,
+				"nickname" => $olderMessage->nickname,
+				"target_nick" => $olderMessage->target_nick,
+				"channel_name" => $olderMessage->channel_name,
+				"type" => $olderMessage->type
+			);
+			$returnData[] = $data;
+		}
+			
+		echo json_encode($returnData);
 	}
 }
 
