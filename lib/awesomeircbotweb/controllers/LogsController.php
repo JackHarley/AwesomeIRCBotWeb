@@ -17,6 +17,9 @@ use awesomeircbotweb\models\LogsModel;
 
 class LogsController extends Controller {
 	
+	/**
+	 * Logs searcher and displayer
+	 */
 	public function index() {
 		
 		if (!$_POST["submit"]) {
