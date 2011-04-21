@@ -104,3 +104,7 @@ img {
 	overflow:hidden;
 	width:33%;
 }
+
+#user-stats {
+	display:inline;
+}

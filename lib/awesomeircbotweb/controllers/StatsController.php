@@ -21,11 +21,7 @@ class StatsController extends Controller {
 	public function index() {
 		
 		$ChannelModel = ChannelModel::getInstance();
-		$hourMessages = $ChannelModel->getMessageCount("hour");
-		$dayMessages = $ChannelModel->getMessageCount("day");
-		$weekMessages = $ChannelModel->getMessageCount("week");
 		
-		$totalUserCount = $ChannelModel->getTotalUsers();
 		$ownerCount = $ChannelModel->getOwnerCount();
 		$protectedCount = $ChannelModel->getProtectedCount();
 		$opCount = $ChannelModel->getOpCount();
@@ -33,16 +29,21 @@ class StatsController extends Controller {
 		$voicedCount = $ChannelModel->getVoicedCount();
 		$totalPrivileged = $ownerCount + $protectedCount + $opCount + $halfOpCount + $voicedCount;
 		$unprivilegedCount = $totalUserCount - $totalPrivileged;
-
+		
+		$totalUserCount = $ChannelModel->getTotalUsers();
+		
 		View::load('stats', array(
-			"hourMessageCount" => $hourMessages,
-			"dayMessageCount" => $dayMessages,
+			"hourMessageCount" => $ChannelModel->getMessageCount("hour"),
+			"dayMessageCount" => $ChannelModel->getMessageCount("day"),
+			"weekMessageCount" => $ChannelModel->getMessageCount("week"),
+			
 			"numberOwners" => $ownerCount,
 			"numberProtected" => $protectedCount,
 			"numberOps" => $opCount,
 			"numberHalfOps" => $halfOpCount,
 			"numberVoiced" => $voicedCount,
 			"numberUnprivileged" => $unprivilegedCount,
+			
 			"numberUsers" => $totalUserCount)
 		);
 	}
@@ -55,24 +56,29 @@ class StatsController extends Controller {
 		if ($UserModel->getOnlineStatus($nick))
 			$isOnline = "yes";
 		
-		$hourMessages = $UserModel->getMessageCount($nick, "hour");
-		$dayMessages = $UserModel->getMessageCount($nick, "day");
-		$weekMessages = $UserModel->getMessageCount($nick, "week");
-		$latestUserMessages = $ChannelModel->getLatestMessages(10, $nick);
-		$hourWords = $UserModel->getWordCount($nick, "hour");
-		$dayWords = $UserModel->getWordCount($nick, "day");
-		$weekWords = $UserModel->getWordCount($nick, "week");
-		
 		View::load("userstats", array(
 			"online" => $isOnline,
 			"nickname" => $nick,
-			"hourMessages" => $hourMessages,
-			"dayMessages" => $dayMessages,
-			"weekMessages" => $weekMessages,
-			"latestUserMessages" => $latestUserMessages,
-			"hourWords" => $hourWords,
-			"dayWords" => $dayWords,
-			"weekWords" => $weekWords)
+			
+			"hour" => array(
+				"messages" => $UserModel->getMessageCount($nick, "hour"),
+				"words" => $UserModel->getWordCount($nick, "hour"),
+				"wordsPerMessage" => $UserModel->getAverageWordsPerMessage($nick, "hour"),
+			),
+			
+			"day" => array(
+				"messages" => $UserModel->getMessageCount($nick, "day"),
+				"words" => $UserModel->getWordCount($nick, "day"),
+				"wordsPerMessage" => $UserModel->getAverageWordsPerMessage($nick, "day")
+			),
+			
+			"week" => array(
+				"messages" => $UserModel->getMessageCount($nick, "week"),
+				"words" => $UserModel->getWordCount($nick, "week"),
+				"wordsPerMessage" => $UserModel->getAverageWordsPerMessage($nick, "week")
+			),
+			
+			"latestUserMessages" => $ChannelModel->getLatestMessages(10, $nick))
 		);
 	}
 }

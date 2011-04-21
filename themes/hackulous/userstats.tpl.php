@@ -14,17 +14,30 @@
 	{% endif %}
 </h3>
 
-<h3>
-	Messages sent in the last hour: {{hourMessages}}<br />
-	Messages sent in the last day: {{dayMessages}}<br />
-	Messages sent in the last week: {{weekMessages}}<br />
-</h3>
-
-<h3>
-	Words sent in the last hour: {{hourWords}}<br />
-	Words sent in the last day: {{dayWords}}<br />
-	Words sent in the last week: {{weekWords}}
-</h3>
+<div id="user-stats">
+	<h2>User Statistics</h2>
+	
+	<h3 id="user-stats">Past Hour</h3><br />
+	<p id="user-stats">
+		Messages sent: {{hour.messages}}<br />
+		Words sent: {{hour.words}}<br />
+		Average words per message: {{hour.wordsPerMessage|round:2}}<br />
+	</p><br />
+	
+	<h3 id="user-stats">Past Day (24 hours)</h3><br />
+	<p id="user-stats">
+		Messages sent: {{day.messages}}<br />
+		Words sent: {{day.words}}<br />
+		Average words per message: {{day.wordsPerMessage|round:2}}<br />
+	</p><br />
+	
+	<h3 id="user-stats">Past Week</h3><br />
+	<p id="user-stats">
+		Messages sent: {{week.messages}}<br />
+		Words sent: {{week.words}}<br />
+		Average words per message: {{week.wordsPerMessage|round:2}}<br />
+	</p><br />
+</div>
 
 <h2>Latest Messages</h2>
 <p>

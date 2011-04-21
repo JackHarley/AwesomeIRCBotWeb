@@ -180,5 +180,15 @@ class UserModel extends Model {
 		
 		return $wordCount;
 	}
+	
+	public function getAverageWordsPerMessage($nick, $time=false) {
+		$words = $this->getWordCount($nick, $time);
+		$messages = $this->getMessageCount($nick, $time);
+		
+		if ($messages < 1)
+			return 0;
+		
+		return $words / $messages;
+	}
 }
 ?>
