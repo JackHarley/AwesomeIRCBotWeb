@@ -13,6 +13,9 @@ use hydrogen\view\View;
 
 class ErrorController extends Controller {
 	
+	/**
+	 * 404 Not Found Error Page
+	 */
 	public function notFound() {
 		View::load('404');
 	}
