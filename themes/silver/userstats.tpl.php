@@ -17,7 +17,13 @@
 <h3>
 	Messages sent in the last hour: {{hourMessages}}<br />
 	Messages sent in the last day: {{dayMessages}}<br />
-	Messages sent in the last week: {{weekMessages}}<br />
+	Messages sent in the last week: {{weekMessages}}
+</h3>
+
+<h3>
+	Words sent in the last hour: {{hourWords}}<br />
+	Words sent in the last day: {{dayWords}}<br />
+	Words sent in the last week: {{weekWords}}
 </h3>
 
 <h2>Latest Messages</h2>

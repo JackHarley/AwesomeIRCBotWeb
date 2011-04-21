@@ -59,6 +59,9 @@ class StatsController extends Controller {
 		$dayMessages = $UserModel->getMessageCount($nick, "day");
 		$weekMessages = $UserModel->getMessageCount($nick, "week");
 		$latestUserMessages = $ChannelModel->getLatestMessages(10, $nick);
+		$hourWords = $UserModel->getWordCount($nick, "hour");
+		$dayWords = $UserModel->getWordCount($nick, "day");
+		$weekWords = $UserModel->getWordCount($nick, "week");
 		
 		View::load("userstats", array(
 			"online" => $isOnline,
@@ -66,7 +69,10 @@ class StatsController extends Controller {
 			"hourMessages" => $hourMessages,
 			"dayMessages" => $dayMessages,
 			"weekMessages" => $weekMessages,
-			"latestUserMessages" => $latestUserMessages)
+			"latestUserMessages" => $latestUserMessages,
+			"hourWords" => $hourWords,
+			"dayWords" => $dayWords,
+			"weekWords" => $weekWords)
 		);
 	}
 }
