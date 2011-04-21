@@ -2,8 +2,12 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<link rel="stylesheet" type="text/css" href="{% viewurl /style.css %}" />
+		<link href="{% viewurl /images/chat.png %}" rel="shortcut icon" type="image/png"/>
+		<link rel="apple-touch-icon" media="screen and (resolution: 163dpi)" href="{% viewurl /images/chat57.png %}" />
+		<link rel="apple-touch-icon" media="screen and (resolution: 132dpi)" href="{% viewurl /images/chat72.png %}" />
+		<link rel="apple-touch-icon" media="screen and (resolution: 326dpi)" href="{% viewurl /images/chat114.png %}" />
 		
-		<title>Awesome IRC Bot -> {% block pageTitle %}{% endblock %}</title>
+		<title>{{channel}} -> {% block pageTitle %}{% endblock %}</title>
 		
 		{% block jsOne %}
 			<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.1.min.js"></script>
