@@ -15,6 +15,10 @@ use awesomeircbotweb\models\UserModel;
 
 class LeaderboardController extends Controller {
 	
+	/**
+	 * Leaderboards page
+	 * Shows hourly, daily & weekly leaderboards
+	 */
 	public function index() {
 		$UserModel = UserModel::getInstance();
 		$leaderboardPastWeekArray = $UserModel->getTopUsersByMessageCount(50, "week");
