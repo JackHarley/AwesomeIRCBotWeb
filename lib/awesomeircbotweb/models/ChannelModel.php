@@ -23,6 +23,13 @@ class ChannelModel extends Model {
 	
 	protected static $modelID = "channel";
 	
+	/**
+	 * Gets all the currently online users on the
+	 * channel and returns them as an array, sorted by
+	 * privileges
+	 *
+	 * @return array online users sorted by privileges
+	 */
 	public function getOnlineUsers() {
 		$query = new Query("SELECT");
 		$query->where("channel_name = ?", Config::getVal("general", "channel"));
@@ -63,6 +70,15 @@ class ChannelModel extends Model {
 		return $orderedUsers;
 	}
 	
+	/**
+	 * Gets the latest messages sent to the channel
+	 * and returns them as an array, latest messages first
+	 *
+	 * @param integer $count number of messages to get
+	 * @param string $nick optionally, specify a nick and only
+	 * get messages sent by that user
+	 * @return array of ChannelActionBean objects
+	 */
 	public function getLatestMessages($count, $nick=false) {
 		$query = new Query("SELECT");
 		$query->where("channel_name = ?", Config::getVal("general", "channel"));
@@ -76,6 +92,15 @@ class ChannelModel extends Model {
 		return $messages;
 	}
 	
+	/**
+	 * Get the total number of messages sent in
+	 * a period of time, or since records began
+	 *
+	 * @param string $time optionally, specify either
+	 * "hour", "day" or "week" to get the number of messages
+	 * sent in that time period
+	 * @return integer number of messages
+	 */
 	public function getMessageCount($time=false) {
 		$query = new Query("SELECT");
 		$query->from("channel_actions");
@@ -102,6 +127,12 @@ class ChannelModel extends Model {
 		return $i;
 	}
 	
+	/**
+	 * Get the number of owners (~)
+	 * connected to the channel
+	 *
+	 * @return integer number of users
+	 */
 	public function getOwnerCount() {
 		$query = new Query("SELECT");
 		$query->from("channel_users");
@@ -118,6 +149,12 @@ class ChannelModel extends Model {
 		return $i;
 	}
 	
+	/**
+	 * Get the number of protected users (&)
+	 * connected to the channel
+	 *
+	 * @return integer number of users
+	 */
 	public function getProtectedCount() {
 		$query = new Query("SELECT");
 		$query->from("channel_users");
@@ -134,6 +171,12 @@ class ChannelModel extends Model {
 		return $i;
 	}
 	
+	/**
+	 * Get the number of operators (@)
+	 * connected to the channel
+	 *
+	 * @return integer number of users
+	 */
 	public function getOpCount() {
 		$query = new Query("SELECT");
 		$query->from("channel_users");
@@ -150,6 +193,12 @@ class ChannelModel extends Model {
 		return $i;
 	}
 	
+	/**
+	 * Get the number of half operators (%)
+	 * connected to the channel
+	 *
+	 * @return integer number of users
+	 */
 	public function getHalfOpCount() {
 		$query = new Query("SELECT");
 		$query->from("channel_users");
@@ -166,6 +215,12 @@ class ChannelModel extends Model {
 		return $i;
 	}
 	
+	/**
+	 * Get the number of voiced users (+)
+	 * connected to the channel
+	 *
+	 * @return integer number of users
+	 */
 	public function getVoicedCount() {
 		$query = new Query("SELECT");
 		$query->from("channel_users");
@@ -182,6 +237,12 @@ class ChannelModel extends Model {
 		return $i;
 	}
 	
+	/**
+	 * Get the total number of users connected
+	 * to the channel
+	 *
+	 * @return integer number of users
+	 */
 	public function getTotalUsers() {
 		$query = new Query("SELECT");
 		$query->from("channel_users");
@@ -197,6 +258,13 @@ class ChannelModel extends Model {
 		return $i;
 	}
 	
+	/**
+	 * Gets the message immediately past the given
+	 * timestamp
+	 *
+	 * @param integer $timestamp unix epoch timestamp
+	 * @return object ChannelActionBean object
+	 */
 	public function getMessagePastTimestamp($timestamp) {
 		$query = new Query("SELECT");
 		$query->where("channel_name = ?", Config::getVal("general", "channel"));
@@ -208,6 +276,13 @@ class ChannelModel extends Model {
 		return $messages[0];
 	}
 	
+	/**
+	 * Gets the message immediately before the given
+	 * timestamp
+	 *
+	 * @param integer $timestamp unix epoch timestamp
+	 * @return object ChannelActionBean object
+	 */
 	public function getMessageBeforeTimestamp($timestamp) {
 		$query = new Query("SELECT");
 		$query->where("channel_name = ?", Config::getVal("general", "channel"));
@@ -219,6 +294,15 @@ class ChannelModel extends Model {
 		return $messages[0];
 	}
 	
+	/**
+	 * Gets the number of messages specified in $count
+	 * that are immediately before the given timestamp
+	 *
+	 * @param integer $timestamp unix epoch timestamp
+	 * @param integer $count number of messages to get
+	 * @return array array of ChannelActionBean objects latest
+	 * first
+	 */
 	public function getMessagesBeforeTimestamp($timestamp, $count) {
 		$query = new Query("SELECT");
 		$query->where("channel_name = ?", Config::getVal("general", "channel"));
