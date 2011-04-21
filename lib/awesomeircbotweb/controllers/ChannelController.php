@@ -59,7 +59,7 @@ class ChannelController extends Controller {
 				}
 				
 				$data = array(
-					"message" => $latestMessage->message,
+					"message" => htmlentities($latestMessage->message),
 					"timestamp" => $latestMessage->time,
 					"nickname" => $latestMessage->nickname,
 					"target_nick" => $latestMessage->target_nick,
@@ -94,7 +94,7 @@ class ChannelController extends Controller {
 			}
 		
 			$data = array(
-				"message" => $olderMessage->message,
+				"message" => htmlentities($olderMessage->message),
 				"timestamp" => $olderMessage->time,
 				"nickname" => $olderMessage->nickname,
 				"target_nick" => $olderMessage->target_nick,
