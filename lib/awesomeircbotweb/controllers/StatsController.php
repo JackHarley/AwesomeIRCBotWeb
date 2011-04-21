@@ -18,6 +18,9 @@ use awesomeircbotweb\models\UserModel;
 
 class StatsController extends Controller {
 	
+	/**
+	 * Shows overall channel stats
+	 */ 
 	public function index() {
 		
 		$ChannelModel = ChannelModel::getInstance();
@@ -48,6 +51,11 @@ class StatsController extends Controller {
 		);
 	}
 	
+	/**
+	 * Shows stats for the given user
+	 *
+	 * @param string nickname to get stats for
+	 */
 	public function user($nick) {
 		
 		$UserModel = UserModel::getInstance();
