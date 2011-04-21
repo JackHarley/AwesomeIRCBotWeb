@@ -18,6 +18,9 @@ use awesomeircbotweb\models\ChannelModel;
 
 class ChannelController extends Controller {
 	
+	/**
+	 * Channel Right Now Page
+	 */
 	public function index() {
 		
 		$ChannelModel = ChannelModel::getInstance();
@@ -38,6 +41,14 @@ class ChannelController extends Controller {
 		);
 	}
 	
+	/**
+	 * AJAX request for the next new message
+	 * after the given timestamp
+	 *
+	 * @param post-int unix epoch timestamp
+	 * @return json message, timestamp, nickname, target_nick,
+	 * channel_name, type
+	 */
 	public function ajax() {
 		
 		if (!$_POST["timestamp"]) {
@@ -75,6 +86,14 @@ class ChannelController extends Controller {
 		}
 	}
 	
+	/**
+	 * AJAX request for 50 messages before
+	 * the given timestamp
+	 *
+	 * @param post-int unix epoch timestamp
+	 * @return json array of objects with message, timestamp,
+	 * nickname, target_nick, channel_name, type
+	 */
 	public function ajaxolder() {
 		
 		if (!$_POST["timestamp"]) {
