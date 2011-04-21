@@ -77,70 +77,29 @@ class ChannelModel extends Model {
 	}
 	
 	public function getMessageCount($time=false) {
-		if (!$time) {
-			$query = new Query("SELECT");
-			$query->from("channel_actions");
-			$query->field("id");
-			$query->where("channel_name = ?", Config::getVal("general", "channel"));
-			$query->where("type = ?", ReceivedLineTypes::CHANMSG);
-			
-			$stmt = $query->prepare();
-			$stmt->execute();
-			
-			$i=0;
-			while($row = $stmt->fetchObject())
-				$i++;
-			return $i;
-		}
-		else if ($time == "hour") {
-			$query = new Query("SELECT");
-			$query->from("channel_actions");
-			$query->field("id");
-			
-			$query->where("channel_name = ?", Config::getVal("general", "channel"));
+		$query = new Query("SELECT");
+		$query->from("channel_actions");
+		$query->field("id");
+		$query->where("channel_name = ?", Config::getVal("general", "channel"));
+		$query->where("type = ?", ReceivedLineTypes::CHANMSG);
+		
+		if ($time == "hour") {
 			$query->where("time > ?", time()-60*60);
-			$query->where("type = ?", ReceivedLineTypes::CHANMSG);
-			
-			$stmt = $query->prepare();
-			$stmt->execute();
-			
-			$i=0;
-			while($row = $stmt->fetchObject())
-				$i++;
-			return $i;
 		}
 		else if ($time == "day") {
-			$query = new Query("SELECT");
-			$query->from("channel_actions");
-			$query->field("id");
-			$query->where("channel_name = ?", Config::getVal("general", "channel"));
 			$query->where("time > ?", time()-60*60*24);
-			$query->where("type = ?", ReceivedLineTypes::CHANMSG);
-			
-			$stmt = $query->prepare();
-			$stmt->execute();
-			
-			$i=0;
-			while($row = $stmt->fetchObject())
-				$i++;
-			return $i;
 		}
 		else if ($time == "week") {
-			$query = new Query("SELECT");
-			$query->from("channel_actions");
-			$query->field("id");
-			$query->where("channel_name = ?", Config::getVal("general", "channel"));
 			$query->where("time > ?", time()-60*60*24*7);
-			$query->where("type = ?", ReceivedLineTypes::CHANMSG);
-			
-			$stmt = $query->prepare();
-			$stmt->execute();
-			
-			$i=0;
-			while($row = $stmt->fetchObject())
-				$i++;
-			return $i;
 		}
+		
+		$stmt = $query->prepare();
+		$stmt->execute();
+		
+		$i=0;
+		while($row = $stmt->fetchObject())
+			$i++;
+		return $i;
 	}
 	
 	public function getOwnerCount() {
