@@ -14,6 +14,9 @@ use hydrogen\view\View;
 
 class HomeController extends Controller {
 	
+	/**
+	 * Site homepage
+	 */
 	public function index() {
 		View::load('index');
 	}
