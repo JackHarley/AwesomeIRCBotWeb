@@ -15,6 +15,9 @@ use hydrogen\config\Config;
 
 class ChatController extends Controller {
 	
+	/**
+	 * Webchat
+	 */
 	public function index() {
 		View::load('chat', array(
 			"address" => Config::getVal('general', 'irc_network_address'),
