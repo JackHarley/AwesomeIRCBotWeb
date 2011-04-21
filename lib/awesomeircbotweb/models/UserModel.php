@@ -94,6 +94,7 @@ class UserModel extends Model {
 			$query->field("id");
 			$query->where("channel_name = ?", Config::getVal("general", "channel"));
 			$query->where("nickname = ?", $nick);
+			$query->where("type = ?", ReceivedLineTypes::CHANMSG);
 			
 			$stmt = $query->prepare();
 			$stmt->execute();
@@ -110,6 +111,7 @@ class UserModel extends Model {
 			$query->where("channel_name = ?", Config::getVal("general", "channel"));
 			$query->where("time > ?", time()-60*60);
 			$query->where("nickname = ?", $nick);
+			$query->where("type = ?", ReceivedLineTypes::CHANMSG);
 			
 			$stmt = $query->prepare();
 			$stmt->execute();
@@ -126,6 +128,7 @@ class UserModel extends Model {
 			$query->where("channel_name = ?", Config::getVal("general", "channel"));
 			$query->where("time > ?", time()-60*60*24);
 			$query->where("nickname = ?", $nick);
+			$query->where("type = ?", ReceivedLineTypes::CHANMSG);
 			
 			$stmt = $query->prepare();
 			$stmt->execute();
@@ -142,6 +145,7 @@ class UserModel extends Model {
 			$query->where("channel_name = ?", Config::getVal("general", "channel"));
 			$query->where("time > ?", time()-60*60*24*7);
 			$query->where("nickname = ?", $nick);
+			$query->where("type = ?", ReceivedLineTypes::CHANMSG);
 			
 			$stmt = $query->prepare();
 			$stmt->execute();
@@ -151,6 +155,30 @@ class UserModel extends Model {
 				$i++;
 			return $i;
 		}
+	}
+	
+	public function getWordCount($nick, $time=false) {
+		$query = new Query("SELECT");
+		$query->where("channel_name = ?", Config::getVal("general", "channel"));
+		$query->where("nickname = ?", $nick);
+		$query->where("type = ?", ReceivedLineTypes::CHANMSG);
+		
+		if ($time == "hour")
+			$query->where("time > ?", time()-60*60);
+		else if ($time == "day")
+			$query->where("time > ?", time()-60*60*24);
+		else if ($time == "week")
+			$query->where("time > ?", time()-60*60*24*7);
+		
+		$messages = ChannelActionBean::select($query);
+		$wordCount = 0;
+		
+		foreach($messages as $message) {
+			$words = str_word_count($message->message);
+			$wordCount += $words;
+		}
+		
+		return $wordCount;
 	}
 }
 ?>

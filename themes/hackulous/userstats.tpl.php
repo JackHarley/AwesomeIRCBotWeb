@@ -20,6 +20,12 @@
 	Messages sent in the last week: {{weekMessages}}<br />
 </h3>
 
+<h3>
+	Words sent in the last hour: {{hourWords}}<br />
+	Words sent in the last day: {{dayWords}}<br />
+	Words sent in the last week: {{weekWords}}
+</h3>
+
 <h2>Latest Messages</h2>
 <p>
 	<table id="messagelist" cellpadding="0" border="0">
