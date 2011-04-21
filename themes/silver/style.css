@@ -16,7 +16,7 @@ body {
 }
 
 p {
-	font-size:120%;
+	font-size:100%;
 }
 
 h2 {
@@ -28,6 +28,7 @@ h1 {
 }
 
 h3 {
+	font-size:135%;
 }
 
 a:link { 
@@ -103,4 +104,8 @@ img {
 	margin: 0 33%;
 	overflow:hidden;
 	width:33%;
+}
+
+#user-stats {
+	display:inline;
 }
