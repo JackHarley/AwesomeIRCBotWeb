@@ -31,9 +31,8 @@ class StatsController extends Controller {
 		$halfOpCount = $ChannelModel->getHalfOpCount();
 		$voicedCount = $ChannelModel->getVoicedCount();
 		$totalPrivileged = $ownerCount + $protectedCount + $opCount + $halfOpCount + $voicedCount;
-		$unprivilegedCount = $totalUserCount - $totalPrivileged;
-		
 		$totalUserCount = $ChannelModel->getTotalUsers();
+		$unprivilegedCount = $totalUserCount - $totalPrivileged;
 		
 		View::load('stats', array(
 			"hourMessageCount" => $ChannelModel->getMessageCount("hour"),
