@@ -86,6 +86,9 @@
 
 {% block content %}
 
+<h2>Current Topic:</h2>
+<p>{{topic}}</p>
+
 <div id="left">
 	<h1>Latest Messages - {{channel}}</h1>
 	<p>

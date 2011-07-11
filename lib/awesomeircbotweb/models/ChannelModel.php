@@ -16,6 +16,7 @@ use hydrogen\config\Config;
 
 use awesomeircbotweb\sqlbeans\ChannelUserBean;
 use awesomeircbotweb\sqlbeans\ChannelActionBean;
+use awesomeircbotweb\sqlbeans\ChannelBean;
 
 use awesomeircbotweb\classes\ReceivedLineTypes;
 
@@ -125,6 +126,22 @@ class ChannelModel extends Model {
 		while($row = $stmt->fetchObject())
 			$i++;
 		return $i;
+	}
+	
+	/**
+	 * Gets the topic for the channel
+	 *
+	 * @return string topic
+	 */
+	public function getTopic() {
+		$query = new Query("SELECT");
+		$query->where("name = ?", Config::getVal("general", "channel"));
+		$query->limit(1);
+		
+		$channels = ChannelBean::select($query);
+		$channel = $channels[0];
+		
+		return $channel->topic;
 	}
 	
 	/**

@@ -34,7 +34,10 @@ class ChannelController extends Controller {
 			}
 		}
 		
+		$topic = $ChannelModel->getTopic();
+		
 		View::load('channel', array(
+			"topic" => $topic,
 			"latestMessages" => $latestMessages,
 			"latestMessage" => $latestMessages[0],
 			"oldestMessage" => $latestMessages[49])
