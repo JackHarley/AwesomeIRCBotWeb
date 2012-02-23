@@ -31,6 +31,10 @@ h3 {
 	font-size:135%;
 }
 
+td {
+	padding-left:16px;
+}
+	
 a:link { 
 	text-decoration: none;
 	color:black;
@@ -60,6 +64,11 @@ img {
 	border: none; 
 }
 
+#wrapper {
+	width:94%;
+	margin: 0 auto;
+}
+
 #header {
 	width: 94%;
 	margin-top: 100px;
@@ -69,11 +78,11 @@ img {
 
 }
 
-
 #page {
 	/* padding-top: 100px; */
 	width: 94%;
 	margin: 0 auto;
+	word-wrap:break-word;
 }
 
 #left {
