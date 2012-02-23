@@ -58,7 +58,10 @@
 	</select>
 	/
 	<select name="startyear">
-		<option selected="selected">2011</option>
+		<option>2014</option>
+		<option>2013</option>
+		<option selected="selected">2012</option>
+		<option>2011</option>
 	</select>
 	
 	<select name="starthour">
@@ -264,7 +267,10 @@
 	</select>
 	/
 	<select name="endyear">
-		<option selected="selected">2011</option>
+		<option>2014</option>
+		<option>2013</option>
+		<option selected="selected">2012</option>
+		<option>2011</option>
 	</select>
 	
 	<select name="endhour">
