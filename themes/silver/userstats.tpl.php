@@ -14,6 +14,17 @@
 	{% endif %}
 </h3>
 
+<h3>Latest Known Details</h3>
+
+<p>
+	{% for message in latestUserMessages %}
+		{% if forloop.first %}
+			Host: {{message.host}}<br />
+			Ident: {{message.ident}}
+		{% endif %}
+	{% endfor %}
+</p>
+
 <div id="user-stats">
 	<h2>User Statistics</h2>
 	
@@ -40,17 +51,28 @@
 </div>
 
 <h2>Latest Messages</h2>
-<p>
-	<table id="messagelist" cellpadding="0" border="0">
+	<table>
 		{% for message in latestUserMessages %}
 			<tr>
-				<td>
-					{{message.time|timetodate:"d M Y H:i:s"}} <a href="{% url /index.php/stats/user %}/{{message.nickname}}"><b>&lt;{{message.nickname}}&gt;</b></a>&nbsp;&nbsp;
-				</td>
-				<td>{{message.message}}</td>
-				<td>&nbsp;&nbsp;</td>
+				<td style="width:170px">{{message.time|timetodate:"d M Y H:i:s"}}</td>
+				{% if message.type == 4412 %}
+					{% if message.nickname != " " %}
+						<td><a href="{% url /index.php/stats/user %}/{{message.nickname}}"><b>&lt;{{message.nickname}}&gt;</b></a></td>
+					{% else %}
+						<td></td>
+					{% endif %}
+					<td style="word-break:break-all">{{message.message|urlize}}</td>
+				{% else if message.type == 421 %}
+					<td></td>
+					<td>{{message.nickname}} joined the channel</td>
+				{% else if message.type == 422 %}
+					<td></td>
+					<td>{{message.nickname}} left the channel</td>
+				{% else if message.type == 412 %}
+					<td></td>
+					<td>{{message.nickname}} changed nickname to {{message.target_nick}}</td>
+				{% endif %}
 			</tr>
 		{% endfor %}
 	</table>
-</p>
 {% endblock %}

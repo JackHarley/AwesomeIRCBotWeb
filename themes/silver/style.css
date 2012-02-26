@@ -32,7 +32,7 @@ h3 {
 }
 
 td {
-	padding-left:16px;
+	padding-right:16px;
 }
 	
 a:link { 
@@ -71,7 +71,7 @@ img {
 
 #header {
 	width: 94%;
-	margin-top: 100px;
+	padding-top: 10px;
 	margin: 0 auto;
 	text-align:center;
 	/* position:fixed; */

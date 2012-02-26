@@ -24,7 +24,12 @@ class ChannelController extends Controller {
 	public function index() {
 		
 		$ChannelModel = ChannelModel::getInstance();
+		
+		$onlineUsers = $ChannelModel->getOnlineUsers();
+
 		$latestMessages = $ChannelModel->getLatestMessages(75);
+		
+		// find any actions and turn them into a nicer format
 		foreach ($latestMessages as $id => $message) {
 			$split = explode(" ", $message->message);
 			
@@ -40,7 +45,8 @@ class ChannelController extends Controller {
 			"topic" => $topic,
 			"latestMessages" => $latestMessages,
 			"latestMessage" => $latestMessages[0],
-			"oldestMessage" => $latestMessages[49])
+			"oldestMessage" => $latestMessages[49],
+			"onlineUsers" => $onlineUsers)
 		);
 	}
 	
@@ -53,6 +59,9 @@ class ChannelController extends Controller {
 	 * channel_name, type
 	 */
 	public function ajax() {
+		
+		// ajax is inefficient shit and is clogging up the server, so just screw it
+		die();
 		
 		if (!$_POST["timestamp"]) {
 			echo "Invalid Request";

@@ -3,7 +3,7 @@
 {% block pageTitle %}Home{% endblock %}
 
 {% block content %}
-<h2>Welcome!</h2>
+<h1>Welcome!</h1>
 
 <p>
 	Welcome to the statistics website for {{channel}}!<br />
