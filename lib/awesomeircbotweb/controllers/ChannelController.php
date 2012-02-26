@@ -54,14 +54,14 @@ class ChannelController extends Controller {
 	 * AJAX request for the next new message
 	 * after the given timestamp
 	 *
+	 * This is no longer used due to load problems, but may be
+	 * reimplemented in the future
+	 * 
 	 * @param post-int unix epoch timestamp
 	 * @return json message, timestamp, nickname, target_nick,
 	 * channel_name, type
 	 */
 	public function ajax() {
-		
-		// ajax is inefficient shit and is clogging up the server, so just screw it
-		die();
 		
 		if (!$_POST["timestamp"]) {
 			echo "Invalid Request";
