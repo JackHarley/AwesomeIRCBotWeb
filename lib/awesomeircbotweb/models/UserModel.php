@@ -190,5 +190,32 @@ class UserModel extends Model {
 		
 		return $words / $messages;
 	}
+	
+	public function login($user, $pass) {
+		$cm = ConfigModel::getInstance();
+		$passwords = $cm->getValue("userPasswords");
+		if ($passwords[$user] == md5($pass)) {
+			$_SESSION["user"] = $user;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public function logout() {
+		unset($_SESSION["user"]);
+	}
+	
+	public function getPermissionLevel() {
+		$cm = ConfigModel::getInstance();
+		$levels = $cm->getValue("users");
+		return $levels[$_SESSION["user"]];
+	}
+	
+	public function getLoggedInNick() {
+		return($_SESSION["user"]);
+	}
+		
 }
 ?>

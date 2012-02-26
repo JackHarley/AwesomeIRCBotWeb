@@ -18,13 +18,15 @@
 	</head>
 	
 	<body>
+		<div id="wrapper">
 		<div id="header">
-			<h1 style="font-size:400%">{{channel}}</h1>
-			<h2><a href="{% url /index.php %}">Home</a> | <a href="{% url /index.php/logs %}">Logs</a> | <a href="{% url /index.php/channel %}">Channel Right Now</a> | <a href="{% url /index.php/stats %}">Stats</a> | <a href="{% url /index.php/leaderboard %}">Leaderboards</a> | <a href="{% url /index.php/help %}">Help</a> | <a href="{% url /index.php/chat %}">Chat!</a>
+			<h1 style="font-size:500%">{{channel}}</h1>
+			<h2><a href="{% url /index.php %}">Home</a> | <a href="{% url /index.php/logs %}">Logs</a> | <a href="{% url /index.php/channel %}">Channel Right Now</a> | <a href="{% url /index.php/stats %}">Stats</a> | <a href="{% url /index.php/leaderboard %}">Leaderboards</a> | <a href="{% url /index.php/chat %}">Chat!</a> | {% if exists loggedInUser %}<a href="{% url /index.php/user/profile %}">{{loggedInUser}}</a>{% else %}<a href="{% url /index.php/user/login %}">Login</a>{% endif %}
 		</div>
 		
 		<div id="page">
 			{% block content %}{% endblock %}
+		</div>
 		</div>
 	</body>
 </html>

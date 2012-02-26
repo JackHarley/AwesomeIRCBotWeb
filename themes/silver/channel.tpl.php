@@ -86,11 +86,11 @@
 
 {% block content %}
 
-<h2>Current Topic:</h2>
-<p>{{topic}}</p>
+<h1>{{channel}}</h1>
 
 <div id="left">
-	<h1>Latest Messages - {{channel}}</h1>
+	{{topic}}
+	
 	<p>
 		<table id="messagelist" cellpadding="0" border="0">
 			<input type="hidden" id="latestmessagets" value="{{latestMessage.time}}" />

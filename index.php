@@ -7,7 +7,7 @@
  * Copyright (c) 2011, Jack Harley
  * All Rights Reserved
  */
-
+session_start();
 error_reporting(E_ALL & ~E_NOTICE);
 ini_set("display_errors", "On");
 date_default_timezone_set('UTC');
@@ -20,16 +20,19 @@ use hydrogen\view\View;
 use hydrogen\config\Config;
 use hydrogen\errorhandler\ErrorHandler;
 
+use awesomeircbotweb\models\UserModel;
 use awesomeircbotweb\models\ChannelModel;
 
-ErrorHandler::attachErrorPage();
+//ErrorHandler::attachErrorPage();
  
 View::setVar("channel", Config::getVal("general", "channel"));
 View::setVar("ircAddress", Config::getVal("general", "irc_network_address"));
 
-$ChannelModel = ChannelModel::getInstance();
-$onlineUsers = $ChannelModel->getOnlineUsers();
-View::setVar("onlineUsers", $onlineUsers);
+$um = UserModel::getInstance();
+$nick = $um->getLoggedInNick();
+
+if ($nick)
+	View::setVar("loggedInUser", $nick);
 
 Dispatcher::addHomeMatchRule("\awesomeircbotweb\controllers\HomeController", "index");
 Dispatcher::addPathInfoAutoMapRule("\awesomeircbotweb\controllers", "Controller");
