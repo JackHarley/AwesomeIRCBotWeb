@@ -8,7 +8,7 @@
  * All Rights Reserved
  */
 session_start();
-error_reporting(E_ALL & ~E_NOTICE);
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 ini_set("display_errors", "On");
 date_default_timezone_set('UTC');
 
@@ -23,7 +23,7 @@ use hydrogen\errorhandler\ErrorHandler;
 use awesomeircbotweb\models\UserModel;
 use awesomeircbotweb\models\ChannelModel;
 
-//ErrorHandler::attachErrorPage();
+ErrorHandler::attachErrorPage();
  
 View::setVar("channel", Config::getVal("general", "channel"));
 View::setVar("ircAddress", Config::getVal("general", "irc_network_address"));
