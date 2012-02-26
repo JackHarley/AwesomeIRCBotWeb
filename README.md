@@ -1,6 +1,6 @@
-# Awesome IRC Bot Web
-Web GUI for AwesomeIRCBot
-Created by AwesomezGuy
+# Awesome IRC Bot Web  
+Web GUI for AwesomeIRCBot  
+Created by AwesomezGuy  
 Follow me on [Twitter](http://twitter.com/AwesomezGuy)
 
 Introduction
